@@ -59,7 +59,6 @@ require('class.csstidy_optimise.php');
 /**
  * CSS Parser class
  *
- 
  * This class represents a CSS parser which reads CSS code and saves it in an array.
  * In opposite to most other CSS parsers, it does not use regular expressions and
  * thus has full CSS2 support and a higher reliability.
@@ -738,6 +737,10 @@ function parse($string) {
                 elseif($string{$i} === '\\')
                 {
                     $this->property .= $this->_unicode($string,$i);
+                }
+                elseif($string{$i} === '*' && $this->property == '')
+                {
+                    $this->property = '*';
                 }
             }
             elseif(!ctype_space($string{$i}))
